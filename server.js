@@ -14,4 +14,13 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/public/notes
 
 app.get('/api/notes', (req, res) => res.json(noteData));
 
+app.post('/api/notes', (req,res) => {
+   const {title, text} = req.body;
+   const newNote = {title, text};
+   noteData.push(newNote);
+   const noteString = JSON.stringify(noteData);
+   fs.writeFile(`./db/db.json`, noteString, (err) => err ? console.error(err) : console.log('success'));
+   res.status(201).json(newNote);
+});
+
 app.listen(PORT, () => console.log(`chillin at http://localhost:${PORT}`))
