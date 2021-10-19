@@ -50,4 +50,4 @@ app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 
-app.listen(PORT, () => console.log(`chillin at http://localhost:${PORT}`));
+app.listen(process.env.PORT || PORT, () => console.log(`chillin at http://localhost:${PORT}`));
